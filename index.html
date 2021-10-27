@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="init()">
+    <header class="main-header flex space-between align-center">
+        <div class="logo">LOGO</div>
+        <ul class="main-nav flex clean-list">
+            <li><a>Gallery</a></li>
+            <li><a>Memes</a></li>
+            <li><a>About</a></li>
+        </ul>
+    </header>
+
+
+    <section class="meme-editor flex">
+        <div class="canvas-container flex">
+            <canvas id="meme-canvas" height="300px" width="300px" style="background-color: white;"></canvas>
+        </div>
+        <div class="meme-editor-dashboard">
+            <input id="text-line" name="text-line" placeholder="text line" onkeyup="onAddText(this.value)">
+            <!-- <div class= "text-functionalities">
+                <button>move line up</button>
+                <button>move line down</button>
+                <button>switch</button>
+                <button>add textline</button>
+                <button>delete textline</button>
+            </div>
+            <div class="text-prefrences">
+                <button>text bigger</button>
+                <button>text smaller</button>
+                <button>alignleft</button>
+                <button>aligncenter</button>
+                <button>alignright</button>
+                <select>
+                    <option>fontfamily</option>
+                </select>
+                <button>strokecolor</button>
+                <input id="color" name="color" type="color" >
+            </div>
+            <section class="add-stickers">
+                <div class="sticker-gallery">
+                    <h3>stickers go here</h3>
+                </div>
+            </section>
+            <div class="actions">
+                <button>SAVE</button>
+                <a href="#" download="">DOWNLOAD</a>
+                <button>SHARE</button> -->
+            <!-- </div>
+        </div>  -->
+
+    </section>
+
+
+    <main class="main-content">
+        <section class="image-gallery">
+            <!-- <div class="search flex align-center">
+                <input id="search" name="search" type="search" placeholder="search">
+                <div class="keywords">KEYWORDS</div>
+            </div> -->
+
+            <section class="galley-grid">
+                <img onclick="onSelectImg(1)" src="img/1.jpg">
+                <img onclick="onSelectImg(2)" src="img/2.jpg">
+            </section>
+        </section>
+
+    </main>
+
+    <!-- <footer>FOOTER GOES HERE</footer> -->
+    
+
+
+    <script src="js/services/storage-service.js"></script>
+    <script src="js/services/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+</body>
+</html>

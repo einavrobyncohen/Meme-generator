@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 12px;
+}
+
+body {
+    margin: 0;
+    background-color: aliceblue;
+}
+
+img {
+    width: 30%;
+    cursor: pointer;
+}
+
+
+/* LAYOUT */
+
+.main-layout{
+    margin: 0 auto;
+}
+
+/* header */
+.main-header {
+    background-color: pink;
+}
+
+.main-nav a:not(last-child) {
+    margin-inline-end: 10px;
+}
+
+/* meme-editor */
+
+.meme-editor {
+    justify-content: center;
+}
+
+
+
+/* img-gallery */
+
+
+
+/* HELPERS */
+
+.flex{
+    display: flex;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+.clean-list {
+    list-style: none;
+    padding: 0;
+
+}
