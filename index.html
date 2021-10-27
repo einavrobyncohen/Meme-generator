@@ -7,31 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/grid.css">
 </head>
 
 <body onload="init()">
-    <header class="main-header flex space-between align-center">
+    <header class="main-header main-layout flex space-between align-center">
         <div class="logo">LOGO</div>
         <ul class="main-nav flex clean-list">
-            <li><a>Gallery</a></li>
-            <li><a>Memes</a></li>
-            <li><a>About</a></li>
+            <li class="gallery-nav" onclick="hideEditor()""><a>Gallery</a></li>
+            <li class="memes-nav"><a>Memes</a></li>
+            <li class="about-nav"><a>About</a></li>
         </ul>
     </header>
 
 
     <section class="meme-editor" hidden>
         <div class="meme-editor-main flex main-layout">
-            <button class="btn-back" onclick="hideEditor()">Back to gallery</button>
             <div class="canvas-container flex">
-                <canvas id="meme-canvas" height="300px" width="300px" style="background-color: white;"></canvas>
+                <canvas id="meme-canvas" height="476px" width="476px" style="background-color: white;"></canvas>
             </div>
     
             <div class="meme-editor-dashboard flex align-center">
               
-                <input id="text-line" name="text-line" placeholder="text line" onkeyup="onAddText(this.value)">
+                <input class="text-line" id="text-line" name="text-line" placeholder="text line" onkeyup="onAddText(this.value)">
                 
-                <div class="text-functionalities">
+                <div class="text-functionalities flex">
                     <button class="btn" onclick="onMoveLine('up')">↑</button>
                     <button class="btn" onclick="onMoveLine('down')">↓</button>
                     <button class="btn" onclick="onSwitchLine()"><img
@@ -85,34 +85,37 @@
     </section>
 
     <main>
-        <div class="main-content flex main-layout">
-            <section class="image-gallery">
-                <div class="search flex align-center">
-                    <input id="search" name="search" type="search" placeholder="search">
-                    <div class="keywords">KEYWORDS</div>
-                </div>
-    
-                <section class="galley-grid">
-                    <img onclick="onSelectImg(1)" src="img/1.jpg">
-                    <img onclick="onSelectImg(2)" src="img/2.jpg">
-                    <img onclick="onSelectImg(3)" src="img/3.jpg">
-                    <img onclick="onSelectImg(4)" src="img/4.jpg">
-                    <img onclick="onSelectImg(5)" src="img/5.jpg">
-                    <img onclick="onSelectImg(6)" src="img/6.jpg">
-                    <img onclick="onSelectImg(7)" src="img/7.jpg">
-                    <img onclick="onSelectImg(8)" src="img/8.jpg">
-                    <img onclick="onSelectImg(9)" src="img/9.jpg">
-                    <img onclick="onSelectImg(10)" src="img/10.jpg">
-                    <img onclick="onSelectImg(11)" src="img/11.jpg">
-                    <img onclick="onSelectImg(12)" src="img/12.jpg">
-                    <img onclick="onSelectImg(13)" src="img/13.jpg">
-                    <img onclick="onSelectImg(14)" src="img/14.jpg">
-                    <img onclick="onSelectImg(15)" src="img/15.jpg">
-                    <img onclick="onSelectImg(16)" src="img/16.jpg">
-                    <img onclick="onSelectImg(17)" src="img/17.jpg">
-                    <img onclick="onSelectImg(18)" src="img/18.jpg">
-                </section>
+        <div class="main-content main-layout">
+            <div class="main-controls flex">
+                <input class="meme-search" id="search" name="search" type="search" placeholder="Search">
+                <button type="submit" class="search-button">
+                    <img src="ICONS/search.png">
+                </button>
+                <!-- <div class="keywords">KEYWORDS</div> -->
+            </div>
+            <div class="image-gallery-container flex">
+                <section class="image-gallery">
+                    <img class="img1" onclick="onSelectImg(1)" src="img/1.jpg">
+                    <img class="img2" onclick="onSelectImg(2)" src="img/2.jpg">
+                    <img class="img3" onclick="onSelectImg(3)" src="img/3.jpg">
+                    <img class="img4" onclick="onSelectImg(4)" src="img/4.jpg">
+                    <img class="img5" onclick="onSelectImg(5)" src="img/5.jpg">
+                    <img class="img6" onclick="onSelectImg(6)" src="img/6.jpg">
+                    <img class="img7" onclick="onSelectImg(7)" src="img/7.jpg">
+                    <img class="img8" onclick="onSelectImg(8)" src="img/8.jpg">
+                    <img class="img9" onclick="onSelectImg(9)" src="img/9.jpg">
+                    <img class="img10" onclick="onSelectImg(10)" src="img/10.jpg">
+                    <img class="img11" onclick="onSelectImg(11)" src="img/11.jpg">
+                    <img class="img12" onclick="onSelectImg(12)" src="img/12.jpg">
+                    <img class="img13" onclick="onSelectImg(13)" src="img/13.jpg">
+                    <img class="img14" onclick="onSelectImg(14)" src="img/14.jpg">
+                    <img class="img15" onclick="onSelectImg(15)" src="img/15.jpg">
+                    <img class="img16" onclick="onSelectImg(16)" src="img/16.jpg">
+                    <img class="img17" onclick="onSelectImg(17)" src="img/17.jpg">
+                    <img class="img18" onclick="onSelectImg(18)" src="img/18.jpg">
             </section>
+            </div>
+
         </div>
 
     </main>

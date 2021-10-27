@@ -3,6 +3,7 @@
 function init() {
     gElCanvas = document.getElementById('meme-canvas')
     gCtx = gElCanvas.getContext('2d')
+
 }
 
 function onDownloadMeme(elLink) {
