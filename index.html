@@ -24,26 +24,31 @@
         </div>
         <div class="meme-editor-dashboard">
             <input id="text-line" name="text-line" placeholder="text line" onkeyup="onAddText(this.value)">
-            <!-- <div class= "text-functionalities">
-                <button>move line up</button>
-                <button>move line down</button>
-                <button>switch</button>
-                <button>add textline</button>
-                <button>delete textline</button>
+            <!-- <button class="btn" onclick="onAddLine()"><img src="ICONS/add.png"></button> -->
+            <div class= "text-functionalities">
+                <button class="btn" onclick="onMoveLine('up')">↑</button>
+                <button class="btn" onclick="onMoveLine('down')">↓</button>
+                <button class="btn" onclick="onSwitchLine()"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                <!-- <button>add textline</button>
+                <button>delete textline</button>  -->
             </div>
-            <div class="text-prefrences">
-                <button>text bigger</button>
-                <button>text smaller</button>
-                <button>alignleft</button>
+            <div class="text-prefrences flex">
+                <button class="btn" onclick="onChangeFontSize('inc')"><img src="ICONS/increase font - icon.png"></button>
+                <button class="btn" onclick="onChangeFontSize('dec')"><img src="ICONS/decrease font - icon.png"></button>
+                <!-- <button>alignleft</button>
                 <button>aligncenter</button>
-                <button>alignright</button>
-                <select>
-                    <option>fontfamily</option>
+                <button>alignright</button> -->
+                <select class="font-options" onchange="onSetFontFamily(this.value)">
+                    <option value="IMPACT">Impact</option>
+                    <option value="ARIEL">Ariel</option>
+                    <option value="MONOSPACE">Monospace</option>
+                    <option value="FANTASY">Fantasy</option>
                 </select>
                 <button>strokecolor</button>
-                <input id="color" name="color" type="color" >
+                <input class="btn" id="color" name="color" type="color">
+                
             </div>
-            <section class="add-stickers">
+            <!-- <section class="add-stickers">
                 <div class="sticker-gallery">
                     <h3>stickers go here</h3>
                 </div>
@@ -51,7 +56,7 @@
             <div class="actions">
                 <button>SAVE</button>
                 <a href="#" download="">DOWNLOAD</a>
-                <button>SHARE</button> -->
+                <button>SHARE</button>  -->
             <!-- </div>
         </div>  -->
 

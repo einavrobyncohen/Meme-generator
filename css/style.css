@@ -38,6 +38,16 @@ img {
     justify-content: center;
 }
 
+.btn {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.btn img {
+    width: 20px;
+    height: 20px;
+}
 
 
 /* img-gallery */
