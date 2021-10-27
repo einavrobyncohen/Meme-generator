@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body onload="init()">
     <header class="main-header flex space-between align-center">
         <div class="logo">LOGO</div>
@@ -18,72 +20,110 @@
     </header>
 
 
-    <section class="meme-editor flex">
-        <div class="canvas-container flex">
-            <canvas id="meme-canvas" height="300px" width="300px" style="background-color: white;"></canvas>
-        </div>
-        <div class="meme-editor-dashboard">
-            <input id="text-line" name="text-line" placeholder="text line" onkeyup="onAddText(this.value)">
-            <!-- <button class="btn" onclick="onAddLine()"><img src="ICONS/add.png"></button> -->
-            <div class= "text-functionalities">
-                <button class="btn" onclick="onMoveLine('up')">↑</button>
-                <button class="btn" onclick="onMoveLine('down')">↓</button>
-                <button class="btn" onclick="onSwitchLine()"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
-                <!-- <button>add textline</button>
-                <button>delete textline</button>  -->
+    <section class="meme-editor" hidden>
+        <div class="meme-editor-main flex main-layout">
+            <button class="btn-back" onclick="hideEditor()">Back to gallery</button>
+            <div class="canvas-container flex">
+                <canvas id="meme-canvas" height="300px" width="300px" style="background-color: white;"></canvas>
             </div>
-            <div class="text-prefrences flex">
-                <button class="btn" onclick="onChangeFontSize('inc')"><img src="ICONS/increase font - icon.png"></button>
-                <button class="btn" onclick="onChangeFontSize('dec')"><img src="ICONS/decrease font - icon.png"></button>
-                <!-- <button>alignleft</button>
-                <button>aligncenter</button>
-                <button>alignright</button> -->
-                <select class="font-options" onchange="onSetFontFamily(this.value)">
-                    <option value="IMPACT">Impact</option>
-                    <option value="ARIEL">Ariel</option>
-                    <option value="MONOSPACE">Monospace</option>
-                    <option value="FANTASY">Fantasy</option>
-                </select>
-                <button>strokecolor</button>
-                <input class="btn" id="color" name="color" type="color">
+    
+            <div class="meme-editor-dashboard flex align-center">
+              
+                <input id="text-line" name="text-line" placeholder="text line" onkeyup="onAddText(this.value)">
                 
-            </div>
-            <!-- <section class="add-stickers">
-                <div class="sticker-gallery">
-                    <h3>stickers go here</h3>
+                <div class="text-functionalities">
+                    <button class="btn" onclick="onMoveLine('up')">↑</button>
+                    <button class="btn" onclick="onMoveLine('down')">↓</button>
+                    <button class="btn" onclick="onSwitchLine()"><img
+                            src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png">
+                    </button>
+                    <button class="btn" onclick="onAddLine()"><img src="ICONS/add.png"></button>
+                    <button class="btn" onclick="onDeleteLine()"><img src="ICONS/trash.png"></button>
                 </div>
-            </section>
-            <div class="actions">
-                <button>SAVE</button>
-                <a href="#" download="">DOWNLOAD</a>
-                <button>SHARE</button>  -->
-            <!-- </div>
-        </div>  -->
-
+    
+                <div class="text-prefrences">
+                    <button class="btn" onclick="onChangeFontSize('inc')"><img
+                            src="ICONS/increase font - icon.png">
+                    </button>
+    
+                    <button class="btn" onclick="onChangeFontSize('dec')"><img
+                            src="ICONS/decrease font - icon.png">
+                    </button>
+    
+                    <button class="btn" onclick="onSetAlignment('left')"><img src="ICONS/align-to-left.png"></button>
+                    <button class="btn" onclick="onSetAlignment('center')"><img src="/ICONS/center-text-alignment.png"></button>
+                    <button class="btn" onclick="onSetAlignment('right')"><img src="/ICONS/align-to-right.png"></button>
+    
+                    <select class="font-options" onchange="onSetFontFamily(this.value)">
+                        <option value="IMPACT">Impact</option>
+                        <option value="ARIEL">Ariel</option>
+                        <option value="MONOSPACE">Monospace</option>
+                        <option value="FANTASY">Fantasy</option>
+                    </select>
+    
+                    <button class="btn stroke-color">
+                        <input id="stroke-color" name="stroke-color" type="color" onblur="onSetStrokeColor(this.value)">
+                    </button>
+                    <button class="btn font-color">
+                        <input id="font-color" name="font-color" type="color" onblur="onSetFontColor(this.value)">
+                    </button>
+    
+                </div>
+                 <section class="add-stickers">
+                    <div class="sticker-gallery">
+                        <h3>stickers go here</h3>
+                    </div>
+                </section>
+                <div class="actions">
+                    <!-- <button>SAVE</button> -->
+                    <a href="#" download="my-meme" onclick="onDownloadMeme(this)">DOWNLOAD</a>
+                    <!-- <button>SHARE</button>  -->
+                 <!-- </div>  -->
+            </div> 
+        </div>
+ 
     </section>
 
-
-    <main class="main-content">
-        <section class="image-gallery">
-            <!-- <div class="search flex align-center">
-                <input id="search" name="search" type="search" placeholder="search">
-                <div class="keywords">KEYWORDS</div>
-            </div> -->
-
-            <section class="galley-grid">
-                <img onclick="onSelectImg(1)" src="img/1.jpg">
-                <img onclick="onSelectImg(2)" src="img/2.jpg">
+    <main>
+        <div class="main-content flex main-layout">
+            <section class="image-gallery">
+                <div class="search flex align-center">
+                    <input id="search" name="search" type="search" placeholder="search">
+                    <div class="keywords">KEYWORDS</div>
+                </div>
+    
+                <section class="galley-grid">
+                    <img onclick="onSelectImg(1)" src="img/1.jpg">
+                    <img onclick="onSelectImg(2)" src="img/2.jpg">
+                    <img onclick="onSelectImg(3)" src="img/3.jpg">
+                    <img onclick="onSelectImg(4)" src="img/4.jpg">
+                    <img onclick="onSelectImg(5)" src="img/5.jpg">
+                    <img onclick="onSelectImg(6)" src="img/6.jpg">
+                    <img onclick="onSelectImg(7)" src="img/7.jpg">
+                    <img onclick="onSelectImg(8)" src="img/8.jpg">
+                    <img onclick="onSelectImg(9)" src="img/9.jpg">
+                    <img onclick="onSelectImg(10)" src="img/10.jpg">
+                    <img onclick="onSelectImg(11)" src="img/11.jpg">
+                    <img onclick="onSelectImg(12)" src="img/12.jpg">
+                    <img onclick="onSelectImg(13)" src="img/13.jpg">
+                    <img onclick="onSelectImg(14)" src="img/14.jpg">
+                    <img onclick="onSelectImg(15)" src="img/15.jpg">
+                    <img onclick="onSelectImg(16)" src="img/16.jpg">
+                    <img onclick="onSelectImg(17)" src="img/17.jpg">
+                    <img onclick="onSelectImg(18)" src="img/18.jpg">
+                </section>
             </section>
-        </section>
+        </div>
 
     </main>
 
     <!-- <footer>FOOTER GOES HERE</footer> -->
-    
+
 
 
     <script src="js/services/storage-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
+
 </html>
