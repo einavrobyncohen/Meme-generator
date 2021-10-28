@@ -13,7 +13,7 @@
 <body onload="init()">
     <div class="main-screen" onclick="toggleMenu()"></div>
     <header class="main-header flex space-between align-center">
-        <div class="logo">LOGO</div>
+        <div class="logo"><img src="/ICONS/LOGO.png"></div>
         <ul class="main-nav flex clean-list">
             <li class="gallery-nav" onclick="hideEditor()""><a>Gallery</a></li>
             <li class="memes-nav"><a>Memes</a></li>
@@ -27,7 +27,7 @@
     <section class="meme-editor" hidden>
         <div class="meme-editor-main flex main-layout">
             <div class="canvas-container flex">
-                <canvas id="meme-canvas" height="546px" width="476px" style="background-color: white;"></canvas>
+                <canvas id="meme-canvas" height="500px" width="460px" style="background-color: white;"></canvas>
             </div>
     
             <div class="meme-editor-dashboard flex align-center">
@@ -35,8 +35,8 @@
                 <input class="text-line" id="text-line" name="text-line" placeholder="text line" onkeyup="onAddText(this.value)">
                 
                 <div class="text-functionalities flex">
-                    <button class="btn" onclick="onMoveLine('up')">↑</button>
-                    <button class="btn" onclick="onMoveLine('down')">↓</button>
+                    <button class="btn" onclick="onMoveLine('up')"><img src="/ICONS/up-arrow.png"></button>
+                    <button class="btn" onclick="onMoveLine('down')"><img src="/ICONS/down-arrow.png"></button>
                     <button class="btn" onclick="onSwitchLine()"><img
                             src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png">
                     </button>
@@ -73,9 +73,9 @@
     
                 </div>
                  <section class="add-stickers">
-                    <div class="sticker-gallery">
+                    <!-- <div class="sticker-gallery">
                         <h3>stickers go here</h3>
-                    </div>
+                    </div> -->
                 </section>
                 <div class="actions">
                     <button class="share-btn">

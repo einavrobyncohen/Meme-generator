@@ -36,7 +36,7 @@ var gMeme = {
             stroke:'black',
             pos: {
                 posx: 230,
-                posy: 500
+                posy: 460
             },
             isSelected: false
         }
@@ -159,7 +159,7 @@ function drawTextBox(x,y,idx) {
     // gCtx.shadowOffsetY = 2;
     // gCtx.shadowBlur = 2;
     // gCtx.shadowColor = 'rgba(0, 0, 0, 0.5)'
-    gCtx.strokeStyle = (!isSelected)? 'white': 'yellow'
+    gCtx.strokeStyle = (!isSelected)? 'white': 'purple'
     gCtx.stroke();
 
 }
