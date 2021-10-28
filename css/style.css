@@ -195,7 +195,7 @@ input[type="color"] {
 
 
 .font-color {
-    background-image: url(/ICONS/paint-board-and-brush.png);
+    background-image: url(../ICONS/paint-board-and-brush.png);
     background-size: 31px;
     background-position: center;
     background-repeat: no-repeat;
@@ -204,7 +204,7 @@ input[type="color"] {
 }
 
 .stroke-color {
-    background-image: url(/ICONS/text\ stroke.png);
+    background-image: url(../ICONS/text\ stroke.png);
     background-size: 31px;
     background-position: center;
     background-repeat: no-repeat;
