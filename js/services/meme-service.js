@@ -116,14 +116,14 @@ function changeFontSize(request) {
 function drawImg() {
     var imgId = gMeme.seletedImgId
     var selectedImg = getImgById(imgId)
-
+    
     var img = new Image()
     img.src = selectedImg.url
     img.onload = () => {
       gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
       drawText()
     };
-}
+}   
 
 function drawText() {
     gMeme.lines.forEach( (line,idx) => {
@@ -138,13 +138,14 @@ function drawText() {
         gCtx.strokeText(line.txt,posx,posy);
         drawTextBox(posx-215, posy-40, idx)
     })
-    
+
 }
 
 function addText(value) {
     const currLineIdx = getCurrSelectedLineIdx()
     gMeme.lines[currLineIdx].txt = value
     drawImg();
+
 }
 
 

@@ -6,8 +6,8 @@ function init() {
     window.addEventListener('resize', function(){
         gCtx.imageSmoothingEnabled = false;
     }, false)
-
 }
+
 
 function toggleMenu(elBtn) {
     document.body.classList.toggle('menu-open')
@@ -106,3 +106,11 @@ function hideEditor() {
     elMain.hidden = false;
 }
 
+
+function resizeCanvas() {
+    var elContainer = document.querySelector('.canvas-container');
+    // Note: changing the canvas dimension this way clears the canvas
+    gElCanvas.width = elContainer.offsetWidth - 20;
+    // Unless needed, better keep height fixed.
+    //   gCanvas.height = elContainer.offsetHeight
+  }
