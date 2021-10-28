@@ -1,6 +1,5 @@
 'use strict'
 
-
 var gElCanvas;
 var gCtx;
 var gCurrFontFamily = 'Impact'
@@ -13,24 +12,24 @@ var gKeywords = {
 var gImgs = _createImgs()
 
 var gMeme = {
-    seletedImgId: 5,
+    seletedImgId: 0,
     selectedLineIdx: 0,
     lines:[
         {
             txt: '',
-            size: 35,
+            size: 30,
             align:'center',
             color:'white',
             stroke:'black',
             pos: {
                 posx: 230,
-                posy: 50
+                posy: 65
             },
             isSelected: true
         },
         {
             txt: '',
-            size: 35,
+            size: 30,
             align:'center',
             color:'white',
             stroke:'black',
@@ -43,39 +42,21 @@ var gMeme = {
     ]
 }
 
-function doUploadMeme(imgDataUrl, onSuccess) {
-
-    const formData = new FormData();
-    formData.append('img', imgDataUrl)
-
-    fetch('//ca-upload.com/here/upload.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(res => res.text())
-    .then((url)=>{
-        console.log('Got back live url:', url);
-        onSuccess(url)
-    })
-    .catch((err) => {
-        console.error(err)
-    })
-}
-
 function addLine() {
     var newLine = _createLine()
     gMeme.lines.push(newLine)
     const currLineIdx = getCurrSelectedLineIdx()
-    gMeme.lines[currLineIdx].isSelected = false;
+    gMeme.lines[currLineIdx].isSelected = false
     gMeme.selectedLineIdx = gMeme.lines.length-1
     drawImg();
 }
 
 function deleteLine() {
+    if (gMeme.lines.length ===1) return;
     const currLineIdx = getCurrSelectedLineIdx()
     gMeme.lines.splice(currLineIdx,1)
     gMeme.selectedLineIdx = 0
-    gMeme.lines[0].isSelected = true;
+    gMeme.lines[0].isSelected = true
     drawImg();
 }
 
@@ -100,23 +81,21 @@ function getTextForLineInput() {
 
 function moveLine(direction) {
     const currLineIdx = getCurrSelectedLineIdx()
-    if(direction === 'up') gMeme.lines[currLineIdx].pos.posy--
-    if(direction === 'down') gMeme.lines[currLineIdx].pos.posy++
+    if(direction === 'up') gMeme.lines[currLineIdx].pos.posy-=10
+    if(direction === 'down') gMeme.lines[currLineIdx].pos.posy+=10
     drawImg();
 }
 
 function changeFontSize(request) {
     const currLineIdx = getCurrSelectedLineIdx()
-    if(request === 'inc') gMeme.lines[currLineIdx].size++
-    else if (request === 'dec') gMeme.lines[currLineIdx].size--
+    if(request === 'inc') gMeme.lines[currLineIdx].size+=5
+    else if (request === 'dec') gMeme.lines[currLineIdx].size-=5
     drawImg();
 }
-
 
 function drawImg() {
     var imgId = gMeme.seletedImgId
     var selectedImg = getImgById(imgId)
-    
     var img = new Image()
     img.src = selectedImg.url
     img.onload = () => {
@@ -138,45 +117,21 @@ function drawText() {
         gCtx.strokeText(line.txt,posx,posy);
         drawTextBox(posx-215, posy-40, idx)
     })
-
 }
 
 function addText(value) {
     const currLineIdx = getCurrSelectedLineIdx()
     gMeme.lines[currLineIdx].txt = value
     drawImg();
-
 }
-
 
 function drawTextBox(x,y,idx) {
     var isSelected = gMeme.lines[idx].isSelected
-    gCtx.beginPath();
+    gCtx.beginPath()
     gCtx.rect(x, y, gElCanvas.width-30, 60);
     gCtx.lineDashOffset = 0;
-
-    // gCtx.shadowOffsetX = 2;
-    // gCtx.shadowOffsetY = 2;
-    // gCtx.shadowBlur = 2;
-    // gCtx.shadowColor = 'rgba(0, 0, 0, 0.5)'
     gCtx.strokeStyle = (!isSelected)? 'white': 'purple'
-    gCtx.stroke();
-
-}
-
-
-function updateGMeme(id) {
-    gMeme.seletedImgId = id
-}
-
-function getImgById(id) {
-    var img = gImgs.find(img => img.id === id)
-    return img
-}
-
-function getCurrSelectedLineIdx() {
-    const idx = gMeme.selectedLineIdx
-    return idx
+    gCtx.stroke()
 }
 
 function setFontFamily(fontFamily) {
@@ -194,19 +149,19 @@ function setFontFamily(fontFamily) {
             gCurrFontFamily = 'Fantasy'
             break;
     }
-    drawImg();
+    drawImg()
 }
 
 function setFontColor(fontColor) {
     const currSelectedLineIdx = gMeme.selectedLineIdx
     gMeme.lines[currSelectedLineIdx].color = fontColor
-    drawImg();
+    drawImg()
 }
 
 function setStrokeColor(strokeColor) {
     const currSelectedLineIdx = gMeme.selectedLineIdx
     gMeme.lines[currSelectedLineIdx].stroke = strokeColor
-    drawImg();
+    drawImg()
 }
 
 function setAlignment(direction) {
@@ -223,7 +178,7 @@ function setAlignment(direction) {
             currLine.align = 'start'
             break; 
     }
-    drawImg();
+    drawImg()
 }
 
 function _createLine() {
@@ -232,7 +187,7 @@ function _createLine() {
 
     var line = {
         txt: '',
-        size: 25,
+        size: 30,
         align:'center',
         color:'white',
         stroke:'black',
@@ -242,10 +197,8 @@ function _createLine() {
         },
         isSelected: true
     }  
-    
     return line
 }
-
 
 function _createImg(id) {
 
@@ -254,7 +207,6 @@ function _createImg(id) {
         url: `img/${id}.jpg`,
         keywords:['happy']
     }
-
     return img
 }
 
@@ -279,6 +231,84 @@ function _createImgs() {
         _createImg(17),
         _createImg(18)
     ]
- 
     return imgs
+}
+
+function doUploadMeme(imgDataUrl, onSuccess) {
+
+    const formData = new FormData();
+    formData.append('img', imgDataUrl)
+
+    fetch('//ca-upload.com/here/upload.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.text())
+    .then((url)=>{
+        console.log('Got back live url:', url);
+        onSuccess(url)
+    })
+    .catch((err) => {
+        console.error(err)
+    })
+}
+
+function updateGMeme(id) {
+    gMeme.seletedImgId = id
+}
+
+function getImgById(id) {
+    var img = gImgs.find(img => img.id === id)
+    return img
+}
+
+function getCurrSelectedLineIdx() {
+    const idx = gMeme.selectedLineIdx
+    return idx
+}
+
+function resetCanvas() {
+    gMeme.lines.forEach((line, idx) => {
+        if (!idx) line.isSelected = true;
+        else line.isSelected = false;
+        line.txt = ''
+    })
+    gMeme.lines[0].isSelected = true;
+    gMeme.selectedLineIdx = 0
+    const secondLine = restoreLines();
+    gMeme.lines = secondLine
+}
+
+function restoreLines() {
+    var lines= [
+        {
+            txt: '',
+            size: 30,
+            align:'center',
+            color:'white',
+            stroke:'black',
+            pos: {
+                posx: 230,
+                posy: 50
+            },
+            isSelected: true
+        },
+        {
+            txt: '',
+            size: 30,
+            align:'center',
+            color:'white',
+            stroke:'black',
+            pos: {
+                posx: 230,
+                posy: 460
+            },
+            isSelected: false
+        }
+    ]
+    return lines
+}
+
+function getImgsForDisplay() {
+    return gImgs
 }
