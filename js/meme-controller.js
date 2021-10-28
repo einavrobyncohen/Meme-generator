@@ -3,7 +3,32 @@
 function init() {
     gElCanvas = document.getElementById('meme-canvas')
     gCtx = gElCanvas.getContext('2d')
+    window.addEventListener('resize', function(){
+        gCtx.imageSmoothingEnabled = false;
+    }, false)
 
+}
+
+function toggleMenu(elBtn) {
+    document.body.classList.toggle('menu-open')
+    if (document.body.classList.contains('menu-open')) {
+        elBtn.innerText = 'X'
+    } else {
+        elBtn.innerText = '☰'
+    }
+}
+
+
+function onUploadMeme() {
+    const imgDataUrl = gElCanvas.toDataURL("image/jpeg");
+    function onSuccess(uploadedImgUrl) {
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+
+        document.querySelector('.share-btn').innerHTML = `
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">Click Me!
+        </a>`
+    }
+    doUploadMeme(imgDataUrl, onSuccess);
 }
 
 function onDownloadMeme(elLink) {

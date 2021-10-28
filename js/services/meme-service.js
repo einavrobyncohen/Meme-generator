@@ -18,29 +18,48 @@ var gMeme = {
     lines:[
         {
             txt: '',
-            size: 25,
+            size: 35,
             align:'center',
             color:'white',
             stroke:'black',
             pos: {
-                posx: 150,
-                posy: 60
+                posx: 230,
+                posy: 50
             },
             isSelected: true
         },
         {
             txt: '',
-            size: 25,
+            size: 35,
             align:'center',
             color:'white',
             stroke:'black',
             pos: {
-                posx: 150,
-                posy: 270
+                posx: 230,
+                posy: 500
             },
             isSelected: false
         }
     ]
+}
+
+function doUploadMeme(imgDataUrl, onSuccess) {
+
+    const formData = new FormData();
+    formData.append('img', imgDataUrl)
+
+    fetch('//ca-upload.com/here/upload.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.text())
+    .then((url)=>{
+        console.log('Got back live url:', url);
+        onSuccess(url)
+    })
+    .catch((err) => {
+        console.error(err)
+    })
 }
 
 function addLine() {
@@ -117,7 +136,7 @@ function drawText() {
         gCtx.textAlign = `${line.align}`
         gCtx.fillText(line.txt, posx,posy);
         gCtx.strokeText(line.txt,posx,posy);
-        drawTextBox(posx-140, posy-40, idx)
+        drawTextBox(posx-215, posy-40, idx)
     })
     
 }
@@ -131,11 +150,17 @@ function addText(value) {
 
 function drawTextBox(x,y,idx) {
     var isSelected = gMeme.lines[idx].isSelected
-    console.log(isSelected)
     gCtx.beginPath();
-    gCtx.rect(x, y, 280, 50);
-    gCtx.strokeStyle = (isSelected)? 'black' : 'white'
+    gCtx.rect(x, y, gElCanvas.width-30, 60);
+    gCtx.lineDashOffset = 0;
+
+    // gCtx.shadowOffsetX = 2;
+    // gCtx.shadowOffsetY = 2;
+    // gCtx.shadowBlur = 2;
+    // gCtx.shadowColor = 'rgba(0, 0, 0, 0.5)'
+    gCtx.strokeStyle = (!isSelected)? 'white': 'yellow'
     gCtx.stroke();
+
 }
 
 
