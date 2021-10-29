@@ -15,8 +15,8 @@
     <header class="main-header flex space-between align-center">
         <div class="logo"><img src="ICONS/LOGO.png"></div>
         <ul class="main-nav flex clean-list">
-            <li class="gallery-nav" onclick="hideEditor()""><a>Gallery</a></li>
-            <li class="memes-nav"><a>Memes</a></li>
+            <li class="gallery-nav" onclick="showGallery()"><a>Gallery</a></li>
+            <li class="memes-nav" onclick="showSaved()"><a>Memes</a></li>
             <li class="about-nav"><a>About</a></li>
             
         </ul>
@@ -25,9 +25,10 @@
 
 
     <section class="meme-editor" hidden>
+        
         <div class="meme-editor-main flex main-layout">
             <div class="canvas-container flex">
-                <canvas id="meme-canvas" height="500px" width="460px" style="background-color: white;"></canvas>
+                <canvas id="meme-canvas" height="500px" width="460px" style="background-color: white;" onclick="onClickedCanvas(event)"></canvas>
             </div>
     
             <div class="meme-editor-dashboard flex align-center">
@@ -72,11 +73,6 @@
                     </button>
     
                 </div>
-                 <section class="add-stickers">
-                    <!-- <div class="sticker-gallery">
-                        <h3>stickers go here</h3>
-                    </div> -->
-                </section>
                 <div class="actions">
                     <button class="share-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22.997" height="22.992" viewBox="0 0 22.997 22.992">
@@ -91,9 +87,8 @@
                           
                         <a href="#" download="my-meme" onclick="onDownloadMeme(this)">Download</a>
                     </button>
+                    <button class="save-btn" onclick="onSaveMeme()"><img src="ICONS/save.gif" alt="Save Me!"></button>
                     
-                    <!-- <button>SHARE</button>  -->
-                 <!-- </div>  -->
             </div> 
         </div>
  
@@ -102,41 +97,46 @@
     <main>
         <div class="main-content main-layout">
             <div class="main-controls flex">
-                <input class="meme-search" id="search" name="search" type="search" placeholder="Search">
-                <button type="submit" class="search-button">
+                    <input class="meme-search" id="keyword" name="keyword" type="search" list="keywords" placeholder="Search" onkeyup="onEnterKeyWord(this.value)">
+                    <datalist id="keywords">
+                        <option value="Happy">
+                        <option value="Funny">
+                        <option value="Crazy">
+                        <option value="Animal">
+                        <option value="Kids">
+                        <option value="Politics">
+                    </datalist>
+                <button type="submit" class="search-button" onclick="toggleSearchBtn(this)">
                     <img src="ICONS/search.png">
                 </button>
-                <!-- <div class="keywords">KEYWORDS</div> -->
+                <div class="keywords-touch flex">
+                    <ul  class="keywords-nav clean-list align-center flex ">
+                        <button hidden><img src="ICONS/left.png"></button>
+                        <li><a onclick="onTouchKeyWord(this)">Happy</a></li>
+                        <li><a onclick="onTouchKeyWord(this)">Funny</a></li>
+                        <li><a onclick="onTouchKeyWord(this)">Crazy</a></li>
+                        <li><a onclick="onTouchKeyWord(this)">Animal</a></li>
+                        <li><a onclick="onTouchKeyWord(this)">Kids</a></li>
+                        <li><a onclick="onTouchKeyWord(this)">Politics</a></li>
+                        <button onclick="showNextKeywords()"><img src="ICONS/right.png"></button>
+                    </ul>
+                </div>
+                
             </div>
-            <div class="image-gallery-container flex">
-                <!-- <section class="image-gallery"> -->
-                    <!-- <img class="img1 grid-square" onclick="onSelectImg(1)" src="img/1.jpg">
-                    <img class="img2 grid-square" onclick="onSelectImg(2)" src="img/2.jpg">
-                    <img class="img3 grid-square" onclick="onSelectImg(3)" src="img/3.jpg">
-                    <img class="img4 grid-square" onclick="onSelectImg(4)" src="img/4.jpg">
-                    <img class="img5 grid-square" onclick="onSelectImg(5)" src="img/5.jpg">
-                    <img class="img6 grid-square" onclick="onSelectImg(6)" src="img/6.jpg">
-                    <img class="img7 grid-square" onclick="onSelectImg(7)" src="img/7.jpg">
-                    <img class="img8 grid-square" onclick="onSelectImg(8)" src="img/8.jpg">
-                    <img class="img9 grid-square" onclick="onSelectImg(9)" src="img/9.jpg">
-                    <img class="img10 grid-square" onclick="onSelectImg(10)" src="img/10.jpg">
-                    <img class="img11 grid-square" onclick="onSelectImg(11)" src="img/11.jpg">
-                    <img class="img12 grid-square" onclick="onSelectImg(12)" src="img/12.jpg">
-                    <img class="img13 grid-square" onclick="onSelectImg(13)" src="img/13.jpg">
-                    <img class="img14 grid-square" onclick="onSelectImg(14)" src="img/14.jpg">
-                    <img class="img15 grid-square" onclick="onSelectImg(15)" src="img/15.jpg">
-                    <img class="img16 grid-square" onclick="onSelectImg(16)" src="img/16.jpg">
-                    <img class="img17 grid-square" onclick="onSelectImg(17)" src="img/17.jpg">
-                    <img class="img18 grid-square" onclick="onSelectImg(18)" src="img/18.jpg"> -->
-            <!-- </section> -->
-            </div>
-
+            <div class="image-gallery-container flex"></div>
         </div>
-
     </main>
+
+    <section class="saved-memes main-layout" hidden>
+        <div class="memes-container flex"></div>
+    </section>
+
     <script src="js/services/storage-service.js"></script>
-    <script src="js/services/meme-service.js"></script>
-    <script src="js/meme-controller.js"></script>
+    <script src="js/services/gallery-service.js"></script>
+    <script src="js/services/memeEditor-service.js"></script>
+    <script src="js/savedMemes-controller.js"></script>
+    <script src="js/gallery-controller.js"></script>
+    <script src="js/memeEditor-controller.js"></script>
 </body>
 
 </html>

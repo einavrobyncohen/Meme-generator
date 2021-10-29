@@ -8,7 +8,6 @@ html {
 
 body {
     margin: 0;
-    
 }
 
 img {
@@ -49,6 +48,10 @@ img {
 /* header */
 
 
+input[type="search"]::-webkit-search-cancel-button {
+    opacity: 0;
+}
+
 .main-header {
     background-image: linear-gradient(90deg, rgba(180,58,134,1) 0%, rgba(183,29,253,1) 50%, rgba(252,228,69,1) 100%);
     margin-bottom: 10px;
@@ -77,6 +80,8 @@ img {
     transition: .4s
 }
 /* meme-editor */
+
+
 
 
 .meme-editor-dashboard {
@@ -230,6 +235,15 @@ input[type="color"] {
     cursor: pointer;
 }
 
+.save-btn {
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 5px 0px #f30051 , 0px -3px 0px rgba(216, 216, 216, 0.418);
+}
+
 .actions svg {
     padding-inline-start: 3px;
     padding-top: 4px;
@@ -264,18 +278,26 @@ canvas {
     font-family: poppins-light;
 }
 
-.search-button {
-    background: transparent;
-    border: none;
-    outline: none;
-    margin-left: -55px;
-}
 
-.search-button img {
+.keywords-nav img {
     width: 40px;
     height: 40px;
-    object-fit: cover;
 }
+
+.keywords-nav button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+}
+
+
+.keywords-nav >*{
+    cursor: pointer;
+    font-family: poppins-light;
+}
+
+
 
 
 /* HELPERS */
@@ -316,15 +338,16 @@ body.menu-open .main-screen {
     opacity: 1;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 740px) {
 
     .main-layout{
         max-width: 350px;
     }
-
+    body,  html{
+        width: 100vw;
+        height: 100vh;
+    }
     body{
-        height:100%;
-        width:100%;
         margin:0;
         background-color: rgb(240, 207, 240);
     }
@@ -393,17 +416,74 @@ body.menu-open .main-screen {
     }
     
     .main-controls {
+        flex-direction: column;
         padding-top: 10px;
     }
 
     .meme-search {
+        position: relative;
         background-color: rgb(255, 255, 255);
-        width: 100%;
+        width: 95%;
         height: 40px;
         font-size: 1rem;
         padding-inline-start: 15px;
         margin-inline-end: 10px;
         margin-inline-start: 10px;
+    }
+
+    .search-button {
+        position: absolute;
+        background: transparent;
+        border: none;
+        outline: none;
+        margin-left:260px;
+    }
+    
+    .search-button img {
+        width: 35px;
+        height: 35px;
+        object-fit: cover;
+    }
+
+    .keywords-touch {
+        width: 320px;
+        height: 40px;
+        color: black;
+        margin-top: 10px;
+        background-color: rgb(245, 244, 214);
+        border-radius: 30px;
+
+    }
+
+    .keywords-nav >* {
+        margin-inline-start: 15px;
+        margin-inline-end: 5px;
+    }
+
+    .keywords-nav >*:first-child{
+        font-size: .56rem;
+    }
+
+    .keywords-nav >*:nth-child(2){
+        font-size: .78rem;
+    }
+
+    .keywords-nav >*:nth-child(3){
+        font-size: .5rem;
+    }
+    .keywords-nav >*:nth-child(4){
+        font-size: 1rem;
+    }
+    .keywords-nav >*:nth-child(5){
+        font-size: .56rem;
+    }
+
+    .keywords-nav >*:nth-child(6){
+        font-size: .25rem;
+    }
+
+    input[type="search"]::-webkit-calendar-picker-indicator {
+        color:rgb(255, 255, 255);
     }
 
     .btn-menu {
@@ -428,7 +508,7 @@ body.menu-open .main-screen {
     #meme-canvas{
         margin-left: 50px;
         margin-bottom: 10px;
-         box-shadow: 0px 0px 12px 1px white;
+        box-shadow: 0px 0px 12px 1px white;
         width: 300%;
     }
 
@@ -486,9 +566,21 @@ body.menu-open .main-screen {
     .share-btn {
         padding: 2px;
     }
+
+    .save-btn {
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 20px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 5px 0px #f30051 , 0px -3px 0px rgba(216, 216, 216, 0.418);
+    }
+
+    
+
 }
 
-@media (min-width: 600px) {
+@media (min-width: 740px) {
     .main-layout{
         max-width: 1300px; 
     }
@@ -540,6 +632,65 @@ body.menu-open .main-screen {
         margin-inline-start: 95px;
     }
 
+    .search-button {
+        background: transparent;
+        border: none;
+        outline: none;
+        margin-left: -55px;
+    }
+    
+    .search-button img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+    }
+
+
+    .keywords-touch {
+        background-color: #22252C;
+        /* width: 500px; */
+        height: 50px;
+        color: white;
+        background-color: rgb(167, 166, 166);
+        margin-inline-start: 15px;
+        border-radius: 30px;
+
+    }
+
+    .keywords-nav >* {
+         margin-inline-start: 20px;
+    }
+
+    .keywords-nav >*:first-child{
+        font-size: 15px;
+    }
+
+    .keywords-nav >*:nth-child(2){
+        font-size: 18px;
+    }
+
+    .keywords-nav >*:nth-child(3){
+        font-size: 13px;
+    }
+    .keywords-nav >*:nth-child(4){
+        font-size: 24px;
+    }
+    .keywords-nav >*:nth-child(5){
+        font-size: 15px;
+    }
+
+    .keywords-nav >*:nth-child(6){
+        font-size: 8px;
+    }
+
+    .keywords-nav:last-child >*{
+        margin-inline-end: 10px;
+    }
+
+    input[type="search"]::-webkit-calendar-picker-indicator {
+        color:#22252C;
+    }
+
     .meme-editor-main {
         background: #f7b3dcc4;
         padding-bottom: 10px;
@@ -552,7 +703,6 @@ body.menu-open .main-screen {
 
     #meme-canvas{
         box-shadow: 0px 0px 12px 1px white;
-        width: 100%;
     }
 
     .meme-editor-dashboard {
@@ -606,8 +756,19 @@ body.menu-open .main-screen {
         padding: 10px;
     }
     .share-btn {
+        margin-inline-start: -50px;
         padding: 9px;
         padding-inline-start: 30px;
         margin-inline-end:20px ;
+    }
+    .save-btn {
+        position: absolute;
+        margin-left: 20px;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 20px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 5px 0px #f30051 , 0px -3px 0px rgba(216, 216, 216, 0.418);
     }
 }

@@ -19,7 +19,25 @@
 .grid-square {
     grid-row: span 1;
     grid-column: span 2;
-  }
+}
+
+
+.memes-container {
+  display: grid;
+  background-color: #e182ee;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.2) 35px, rgba(255, 255, 255, 0.2) 70px), repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,0.4) 35px, rgba(255,255,255,0.4) 70px);
+  grid-auto-rows: minmax(50px, 1fr);
+}
+
+.meme-img {
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px 1px white;
+  cursor: pointer;
+  transition: .2s;
+  grid-row: span 1;
+  grid-column: span 2;
+}
+
 
 @media (min-width: 740px) {
     .image-gallery {
@@ -27,6 +45,23 @@
         grid-auto-rows: minmax(50px, 1fr);
         margin-inline-start:100px;
         grid-gap: 20px;
+    }
+    .memes-container {
+      padding: 10px;
+      height: 70vh;
+      margin-top: 50px;
+      border-radius: 30px;
+      margin-inline-start:100px;
+      margin-inline-end:100px;
+      background-color: #e182ee;
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.2) 35px, rgba(255, 255, 255, 0.2) 70px), repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,0.4) 35px, rgba(255,255,255,0.4) 70px);
+      grid-template-columns: repeat(12, 70px);
+      grid-auto-rows: minmax(50px, 1fr);
+      grid-gap: 20px;
+    }
+    .meme-img {
+      grid-row: span 1;
+      grid-column: span 2;
     }
 
 }
@@ -40,6 +75,16 @@
       grid-gap: 10px;
     }
 
+    .memes-container {
+      margin-top:30px;
+      padding: 10px;
+      background-color: #e182ee;
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.2) 35px, rgba(255, 255, 255, 0.2) 70px), repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,0.4) 35px, rgba(255,255,255,0.4) 70px);
+      grid-template-columns: repeat(2, 170px);
+      grid-auto-rows: minmax(50px, 1fr);
+      grid-gap: 10px;
+    }
+
     img {
         width: 90%;
     }
@@ -49,18 +94,9 @@
       grid-row: span 1;
     }
 
-/*   
-    .grid-landscape {
-      grid-column: span 1;
+    .meme-img {
+      width: 90%;
       grid-row: span 1;
-    }
-  
-    .grid-protrate {
       grid-column: span 1;
-      grid-row: span 1;
     }
-    /* .second-panel {
-      height: 1400px;
-    } */
 }
-
