@@ -7,13 +7,10 @@ function addMouseListeners() {
     gElCanvas.addEventListener('mouseup', onUp)
 }
 
-
-
 function onClickedCanvas(ev) {
     clickedCanvas(ev)
     renderInputText()
 }
-
 
 function onAddLine() {
     addLine()

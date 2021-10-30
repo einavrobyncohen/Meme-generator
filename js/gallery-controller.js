@@ -25,14 +25,14 @@ function showNextKeywords(isFirst) {
     <li><a onclick="onTouchKeyWord(this)">${keywords[3]}</a></li>
     <li><a onclick="onTouchKeyWord(this)">${keywords[4]}</a></li>
     <li><a onclick="onTouchKeyWord(this)">${keywords[5]}</a></li>
-    <button onclick="showNextKeywords(false)"><img src="ICONS/right.png"></button>`
+    <button class="next-btn" onclick="showNextKeywords(false)"><img src="ICONS/right.png"></button>`
     elContainer.innerHTML = newStrHTML
 }
 
 function onTouchKeyWord(elKeyword) {
     var keywords = getKeywords()
     const keyWord = elKeyword.innerText.toLowerCase();
-    keywords[keyWord]+=5
+    keywords[keyWord]+=2
     elKeyword.style.fontSize = keywords[keyWord] + 'px'
     onEnterKeyWord(keyWord)
 }
@@ -97,6 +97,7 @@ function showGallery() {
     var elMain = document.querySelector('main')
     elMain.hidden = false
     document.body.classList.remove('menu-open')
+    document.querySelector('.btn-menu').innerText = '☰'
 }
 
 function showSaved() {
@@ -110,6 +111,7 @@ function showSaved() {
     var elMain = document.querySelector('main')
     elMain.hidden = true
     document.body.classList.remove('menu-open')
+    document.querySelector('.btn-menu').innerText = '☰'
     renderSavedMemes()
 
 }

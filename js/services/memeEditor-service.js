@@ -239,7 +239,6 @@ function clickedCanvas(ev) {
         }
         drawImg();
         if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
-            console.log('lala')
             drawSticker();
         }
     }
@@ -255,7 +254,6 @@ function addLine() {
     gMeme.selectedLineIdx = gMeme.lines.length-1
     drawImg()
     if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
-        console.log('lala')
         drawSticker();
     }
 }
@@ -268,7 +266,6 @@ function deleteLine() {
     gMeme.lines[0].isSelected = true
     drawImg()
     if (gSticker.stickers[0].isPlaced) {
-        console.log('lala')
         drawSticker();
     }
 }
@@ -299,7 +296,6 @@ function changeFontSize(request) {
     else if (request === 'dec') gMeme.lines[currLineIdx].size-=5
     drawImg();
     if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
-        console.log('lala')
         drawSticker();
     }
     
@@ -337,7 +333,6 @@ function addText(value) {
     gMeme.lines[currLineIdx].txt = value
     drawImg();
     if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
-        console.log('lala')
         drawSticker();
     }
     
@@ -369,7 +364,6 @@ function setFontFamily(fontFamily) {
     }
     drawImg()
     if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
-        console.log('lala')
         drawSticker();
     }
 
@@ -380,7 +374,6 @@ function setFontColor(fontColor) {
     gMeme.lines[currSelectedLineIdx].color = fontColor
     drawImg()
     if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
-        console.log('lala')
         drawSticker();
     }
     
@@ -391,7 +384,6 @@ function setStrokeColor(strokeColor) {
     gMeme.lines[currSelectedLineIdx].stroke = strokeColor
     drawImg()
     if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
-        console.log('lala')
         drawSticker();
     }
     
@@ -413,7 +405,6 @@ function setAlignment(direction) {
     }
     drawImg()
     if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
-        console.log('lala')
         drawSticker();
     }
 }
