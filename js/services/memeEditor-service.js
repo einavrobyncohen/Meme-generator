@@ -265,7 +265,7 @@ function deleteLine() {
     gMeme.selectedLineIdx = 0
     gMeme.lines[0].isSelected = true
     drawImg()
-    if (gSticker.stickers[0].isPlaced) {
+    if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
         drawSticker();
     }
 }
@@ -469,6 +469,10 @@ function resetCanvas() {
     gMeme.selectedLineIdx = 0
     const secondLine = restoreLines();
     gMeme.lines = secondLine
+    gSticker.stickers.forEach(sticker => {
+        sticker.isPicked = false
+        sticker.isPlaced = false
+    })
 }
 
 function restoreLines() {
