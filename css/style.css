@@ -298,8 +298,6 @@ canvas {
 }
 
 
-
-
 /* HELPERS */
 
 .flex{
@@ -555,8 +553,7 @@ body.menu-open .main-screen {
     } 
 
     .add-stickers {
-        width: 140px;
-        height: 10px;
+        display: none;
     }
 
     .download-btn {
@@ -749,7 +746,27 @@ body.menu-open .main-screen {
     .add-stickers {
         width: 440px;
         height: 90px;
+        background-color: yellow; 
+        padding: 3px;
         margin-bottom: 30px;
+    }
+
+    .stickers img {
+        padding: 2px;
+        width: 80px;
+    }
+
+    .stickers img:first-of-type {
+        width: 70px;
+        margin-inline-start: 20px;
+    }
+
+    .stickers img:last-of-type {
+        width: 55px;
+    }
+
+    .stickers img:nth-last-of-type(3) {
+        width: 60px;
     }
 
     .download-btn {

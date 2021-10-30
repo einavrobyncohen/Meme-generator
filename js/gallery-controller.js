@@ -1,55 +1,39 @@
 'use strict'
 
 function init() {
-
     gElCanvas = document.getElementById('meme-canvas')
     gCtx = gElCanvas.getContext('2d')
 
     window.addEventListener('resize', function(){
         gCtx.imageSmoothingEnabled = false
     }, false)
-
-
-    introduceEventListeners()
+    addMouseListeners()
     renderGallery()
 }
 
-function introduceEventListeners() {
-    addMouseListeners()
-    addTouchListeners()
-}
 
-function showNextKeywords() {
+function showNextKeywords(isFirst) {
+    const FirstKeyWordList =['Happy','Funny','Crazy','Animal','Kids','Politics']
+    const SecondKeyWordList = ['Weird','Movies','Dogs','Cats','Love','Shock']
+    var keywords = (isFirst)? FirstKeyWordList : SecondKeyWordList
     var elContainer = document.querySelector('.keywords-nav')
-    const strHTML ='<button onclick="showPreviousKeywords()"><img src="ICONS/left.png"></button>'
     const newStrHTML = `
-    <li><a onclick="onTouchKeyWord(this)">Weird</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Movies</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Dogs</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Cats</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Love</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Shock</a></li>`
-    elContainer.innerHTML = strHTML +newStrHTML
+    <button onclick="showNextKeywords(true)"><img src="ICONS/left.png"></button>
+    <li><a onclick="onTouchKeyWord(this)">${keywords[0]}</a></li>
+    <li><a onclick="onTouchKeyWord(this)">${keywords[1]}</a></li>
+    <li><a onclick="onTouchKeyWord(this)">${keywords[2]}</a></li>
+    <li><a onclick="onTouchKeyWord(this)">${keywords[3]}</a></li>
+    <li><a onclick="onTouchKeyWord(this)">${keywords[4]}</a></li>
+    <li><a onclick="onTouchKeyWord(this)">${keywords[5]}</a></li>
+    <button onclick="showNextKeywords(false)"><img src="ICONS/right.png"></button>`
+    elContainer.innerHTML = newStrHTML
 }
-
-function showPreviousKeywords() {
-    var elContainer = document.querySelector('.keywords-nav')
-    const strHTML ='<button onclick="showNextKeywords()"><img src="ICONS/right.png"></button>'
-    const newStrHTML = `
-    <li><a onclick="onTouchKeyWord(this)">Happy</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Funny</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Crazy</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Animal</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Kids</a></li>
-    <li><a onclick="onTouchKeyWord(this)">Politics</a></li>`
-    elContainer.innerHTML = newStrHTML+strHTML 
-}
-
 
 function onTouchKeyWord(elKeyword) {
+    var keywords = getKeywords()
     const keyWord = elKeyword.innerText.toLowerCase();
-    gKeywords[keyWord]+=5
-    elKeyword.style.fontSize = gKeywords[keyWord] + 'px'
+    keywords[keyWord]+=5
+    elKeyword.style.fontSize = keywords[keyWord] + 'px'
     onEnterKeyWord(keyWord)
 }
 
@@ -61,6 +45,7 @@ function removeSearch() {
 
 function onEnterKeyWord(value) {
     var elInput = value.toLowerCase();
+    const images = getImgs()
     var imgs = []
     if (elInput === '') {
         var searchBtn = document.querySelector('.search-button')
@@ -71,7 +56,7 @@ function onEnterKeyWord(value) {
     var searchBtn = document.querySelector('.search-button')
     searchBtn.innerHTML = `<img src="ICONS/remove-search.png">`
 
-    gImgs.forEach(img => {
+    images.forEach(img => {
         var keyWordsLength = img.keywords.length
         for (var i=0; i<keyWordsLength ; i++) {
             if(img.keywords[i].substr(0, value.length).toLowerCase() === elInput) {
@@ -138,7 +123,7 @@ function toggleMenu(elBtn) {
     }
 }
 
-function toggleSearchBtn(elBtn) {
+function removeSearchBtn(elBtn) {
     elBtn.innerHTML = `<img src="ICONS/search.png">`
     removeSearch()
 }

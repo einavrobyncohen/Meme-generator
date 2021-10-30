@@ -18,80 +18,74 @@
             <li class="gallery-nav" onclick="showGallery()"><a>Gallery</a></li>
             <li class="memes-nav" onclick="showSaved()"><a>Memes</a></li>
             <li class="about-nav"><a>About</a></li>
-            
         </ul>
         <button class="btn-menu" onclick="toggleMenu(this)">☰</button>
     </header>
 
 
     <section class="meme-editor" hidden>
-        
         <div class="meme-editor-main flex main-layout">
             <div class="canvas-container flex">
                 <canvas id="meme-canvas" height="500px" width="460px" style="background-color: white;" onclick="onClickedCanvas(event)"></canvas>
             </div>
-    
             <div class="meme-editor-dashboard flex align-center">
-              
                 <input class="text-line" id="text-line" name="text-line" placeholder="text line" onkeyup="onAddText(this.value)">
-                
                 <div class="text-functionalities flex">
-                    <button class="btn" onclick="onMoveLine('up')"><img src="ICONS/up-arrow.png"></button>
-                    <button class="btn" onclick="onMoveLine('down')"><img src="ICONS/down-arrow.png"></button>
                     <button class="btn" onclick="onSwitchLine()"><img
                             src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png">
                     </button>
                     <button class="btn" onclick="onAddLine()"><img src="ICONS/add.png"></button>
                     <button class="btn" onclick="onDeleteLine()"><img src="ICONS/trash.png"></button>
                 </div>
-    
                 <div class="text-prefrences">
                     <button class="btn" onclick="onChangeFontSize('inc')"><img
                             src="ICONS/increase font - icon.png">
                     </button>
-    
                     <button class="btn" onclick="onChangeFontSize('dec')"><img
                             src="ICONS/decrease font - icon.png">
                     </button>
-    
                     <button class="btn" onclick="onSetAlignment('left')"><img src="ICONS/align-to-left.png"></button>
                     <button class="btn" onclick="onSetAlignment('center')"><img src="ICONS/center-text-alignment.png"></button>
                     <button class="btn" onclick="onSetAlignment('right')"><img src="ICONS/align-to-right.png"></button>
-    
                     <select class="font-options" onchange="onSetFontFamily(this.value)">
                         <option value="IMPACT">IMPACT</option>
                         <option value="ARIEL">ARIEL</option>
                         <option value="MONOSPACE">MONOSPACE</option>
                         <option value="FANTASY">FANTASY</option>
                     </select>
-    
                     <button class="btn stroke-color">
                         <input id="stroke-color" name="stroke-color" type="color" onblur="onSetStrokeColor(this.value)">
                     </button>
                     <button class="btn font-color">
                         <input id="font-color" name="font-color" type="color" onblur="onSetFontColor(this.value)">
                     </button>
-    
                 </div>
+                <section  class="add-stickers">
+                   <div class="stickers">
+                       <img src="STICKERS/1.gif"/>
+                       <img src="STICKERS/2.gif"/>
+                       <img src="STICKERS/3.png"/>
+                       <img src="STICKERS/4.png"/>
+                       <img src="STICKERS/5.png"/>
+ 
+                   </div>
+
+                </section>
                 <div class="actions">
                     <button class="share-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22.997" height="22.992" viewBox="0 0 22.997 22.992">
                             <path id="Forme_7" data-name="Forme 7" d="M764.774,603.617a4.2,4.2,0,0,0-3.3,1.6l-7.182-3.639a4.127,4.127,0,0,0,.16-1.083,4.01,4.01,0,0,0-.19-1.175l7.145-3.623a4.168,4.168,0,1,0-.857-2.509,4.123,4.123,0,0,0,.161,1.083l-7.176,3.639A4.19,4.19,0,1,0,753.6,603l7.145,3.623a4.067,4.067,0,0,0-.2,1.18,4.227,4.227,0,1,0,4.227-4.19Zm0,0" transform="translate(-746.004 -589.004)" fill="#fff"/>
                           </svg>
-                          <a onclick="onUploadMeme()">Share</a></button>
-                      
+                          <a onclick="onUploadMeme()">Share</a></button>               
                     <button class="download-btn download">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19.999" height="20.999" viewBox="0 0 19.999 20.999">
                             <path id="Forme_8" data-name="Forme 8" d="M970.389,611A1.4,1.4,0,0,1,969,609.591v-6.206h2.775v4.8H986.22v-4.8H989v6.206A1.4,1.4,0,0,1,987.607,611Zm8.355-8.089-3.974-4.882s-.607-.579.05-.579h2.24v-7.1s-.092-.345.424-.345h3.152c.371,0,.364.291.364.291V597.3h2.067c.795,0,.2.606.2.606s-3.38,4.563-3.856,5.042a.418.418,0,0,1-.3.144A.539.539,0,0,1,978.744,602.91Z" transform="translate(-968.999 -590)" fill="#fff"/>
                           </svg>
-                          
                         <a href="#" download="my-meme" onclick="onDownloadMeme(this)">Download</a>
                     </button>
                     <button class="save-btn" onclick="onSaveMeme()"><img src="ICONS/save.gif" alt="Save Me!"></button>
-                    
             </div> 
         </div>
- 
     </section>
 
     <main>
@@ -106,22 +100,21 @@
                         <option value="Kids">
                         <option value="Politics">
                     </datalist>
-                <button type="submit" class="search-button" onclick="toggleSearchBtn(this)">
+                <button type="submit" class="search-button" onclick="removeSearchBtn(this)">
                     <img src="ICONS/search.png">
                 </button>
                 <div class="keywords-touch flex">
                     <ul  class="keywords-nav clean-list align-center flex ">
-                        <button hidden><img src="ICONS/left.png"></button>
+                        <button onclick="showNextKeywords(true)"><img src="ICONS/left.png"></button>
                         <li><a onclick="onTouchKeyWord(this)">Happy</a></li>
                         <li><a onclick="onTouchKeyWord(this)">Funny</a></li>
                         <li><a onclick="onTouchKeyWord(this)">Crazy</a></li>
                         <li><a onclick="onTouchKeyWord(this)">Animal</a></li>
                         <li><a onclick="onTouchKeyWord(this)">Kids</a></li>
                         <li><a onclick="onTouchKeyWord(this)">Politics</a></li>
-                        <button onclick="showNextKeywords()"><img src="ICONS/right.png"></button>
+                        <button onclick="showNextKeywords(false)"><img src="ICONS/right.png"></button>
                     </ul>
                 </div>
-                
             </div>
             <div class="image-gallery-container flex"></div>
         </div>

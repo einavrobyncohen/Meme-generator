@@ -3,59 +3,10 @@
 function addMouseListeners() {
     gElCanvas.addEventListener('mousemove', onMove)
     gElCanvas.addEventListener('mousedown', onDown)
+    document.querySelector('.stickers').addEventListener('mousedown', onDown)
     gElCanvas.addEventListener('mouseup', onUp)
 }
 
-function addTouchListeners() {
-    gElCanvas.addEventListener('touchmove', onMove)
-    gElCanvas.addEventListener('touchstart', onDown)
-    gElCanvas.addEventListener('touchend', onUp)
-}
-
-function onDown(ev) {
-    console.log(ev)
-    if(clickedCanvas(ev) ===-1) return;
-    console.log(ev)
-    const pos = getEvPos(ev)
-    setLineDrag(true)
-    gStartPos = pos
-    document.body.style.cursor = 'grabbing'
-}
-
-
-function onMove(ev) {
-    const line = gMeme.lines[getCurrSelectedLineIdx()]
-    if (line.isDrag) {
-        const pos = getEvPos(ev)
-        const dx = pos.x - gStartPos.x
-        const dy = pos.y - gStartPos.y
-        gStartPos = pos
-        moveLine(dx, dy)
-        drawImg()
-    }
-}
-
-function onUp() {
-    setLineDrag(false)
-    document.body.style.cursor = 'grab'
-}
-
-function setLineDrag(isDrag) {
-    gMeme.lines[getCurrSelectedLineIdx()].isDrag = isDrag
-}
-
-function moveLine(dx, dy) {
-    gMeme.lines[getCurrSelectedLineIdx()].pos.posx += dx
-    gMeme.lines[getCurrSelectedLineIdx()].pos.posy += dy
-}
-
-function getEvPos(ev) {
-    var pos = {
-        x: ev.offsetX,
-        y: ev.offsetY
-    }
-    return pos
-}
 
 
 function onClickedCanvas(ev) {

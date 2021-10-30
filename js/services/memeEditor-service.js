@@ -1,11 +1,14 @@
 'use strict'
 
-const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
+
 const KEY = 'memesDB'
 var gElCanvas;
 var gCtx;
 var gCurrFontFamily = 'Impact'
 var gStartPos;
+
+var gSticker = _createStickers()
+var gStartPosSticker;
 
 var gMemesForStorage = []
 
@@ -42,6 +45,168 @@ var gMeme = {
     ]
 }
 
+
+function onDown(ev) {
+    const pos = getEvPos(ev)
+    if(ev.target.nodeName === 'IMG'){
+        gSticker.selectedStickerIdx = +ev.target.src.charAt(ev.target.src.length-5)-1
+        gSticker.stickers[gSticker.selectedStickerIdx].isPicked = true;
+        gSticker.stickers[gSticker.selectedStickerIdx].isPlaced = true;
+        drawSticker()
+        return;
+    }
+    if(ev.offsetX >=190 && ev.offsetX <= 290 && ev.offsetY >=240 && ev.offsetY <=345) {
+        if (!gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) return
+        if (!gSticker.stickers[gSticker.selectedStickerIdx].isPicked) return
+        gSticker.stickers[gSticker.selectedStickerIdx].isDrag = true;
+        gStartPosSticker = pos;
+        document.body.style.cursor = 'grabbing'
+
+        return;
+    }
+    if(ev.offsetX >= gSticker.stickers[gSticker.selectedStickerIdx].pos.posx && ev.offsetX <= gSticker.stickers[gSticker.selectedStickerIdx].pos.posx+gSticker.stickers[gSticker.selectedStickerIdx].width && ev.offsetY>= gSticker.stickers[gSticker.selectedStickerIdx].pos.posy && ev.offsetY <= gSticker.stickers[gSticker.selectedStickerIdx].pos.posy+ gSticker.stickers[gSticker.selectedStickerIdx].height ) {
+        gSticker.stickers[gSticker.selectedStickerIdx].isDrag = true;
+        gStartPosSticker = pos;
+        document.body.style.cursor = 'grabbing'
+    }
+    if(clickedCanvas(ev) ===-1) return;
+    setLineDrag(true)
+    gStartPos = pos
+    document.body.style.cursor = 'grabbing'
+}
+
+
+function onMove(ev) {
+    const line = gMeme.lines[getCurrSelectedLineIdx()]
+    if (line.isDrag) {
+        const pos = getEvPos(ev)
+        const dx = pos.x - gStartPos.x
+        const dy = pos.y - gStartPos.y
+        gStartPos = pos
+        moveLine(dx, dy)
+        drawImg()
+    } else if(gSticker.stickers[gSticker.selectedStickerIdx].isDrag) {
+        const pos = getEvPos(ev)
+        const dx = pos.x - gStartPosSticker.x
+        const dy = pos.y - gStartPosSticker.y
+        gStartPosSticker = pos;
+        moveSticker(dx, dy)
+        drawSticker()
+    }
+}
+
+function onUp() {
+    setLineDrag(false)
+    gSticker.stickers[gSticker.selectedStickerIdx].isDrag = false;
+    gSticker.stickers[gSticker.selectedStickerIdx].isPicked = false;
+    document.body.style.cursor = 'grab'
+}
+
+function setLineDrag(isDrag) {
+    gMeme.lines[getCurrSelectedLineIdx()].isDrag = isDrag
+}
+
+function moveLine(dx, dy) {
+    gMeme.lines[getCurrSelectedLineIdx()].pos.posx += dx
+    gMeme.lines[getCurrSelectedLineIdx()].pos.posy += dy
+}
+
+function moveSticker(dx, dy) {
+    gSticker.stickers[gSticker.selectedStickerIdx].pos.posx += dx
+    gSticker.stickers[gSticker.selectedStickerIdx].pos.posy += dy
+}
+
+function getEvPos(ev) {
+    var pos = {
+        x: ev.offsetX,
+        y: ev.offsetY
+    }
+    
+    return pos
+}
+
+function _createStickers() {
+    var allStickers = {
+        selectedStickerIdx: 0,
+        stickers: [
+            {
+                isPlaced: false,
+                isPicked:false,
+                isDrag:false,
+                url: 'STICKERS/1.gif',
+                pos: {
+                    posx: 190,
+                    posy: 230
+                },
+                width: 100,
+                height: 82
+            },
+            {
+                isPlaced: false,
+                isPicked:false,
+                isDrag:false,
+                url: 'STICKERS/2.gif',
+                pos: {
+                    posx: 190,
+                    posy: 230
+                },
+                width: 150,
+                height: 100
+            },
+            {
+                isPlaced: false,
+                isPicked:false,
+                isDrag:false,
+                url: 'STICKERS/3.png',
+                pos: {
+                    posx: 190,
+                    posy: 230
+                },
+                width: 100,
+                height: 100
+            },
+            {
+                isPlaced: false,
+                isPicked:false,
+                isDrag:false,
+                url: 'STICKERS/4.png',
+                pos: {
+                    posx: 190,
+                    posy: 230
+                },
+                width: 150,
+                height: 150
+            },
+            {
+                isPlaced: false,
+                isPicked:false,
+                isDrag:false,
+                url: 'STICKERS/5.png',
+                pos: {
+                    posx: 190,
+                    posy: 230
+                },
+                width: 100,
+                height: 150
+            }
+        ]
+    }
+        
+
+    return allStickers
+}
+
+
+function drawSticker() {
+    drawImg();
+    var img = new Image()
+    img.src = gSticker.stickers[gSticker.selectedStickerIdx].url
+    img.onload = () => {
+        gCtx.drawImage(img, gSticker.stickers[gSticker.selectedStickerIdx].pos.posx, gSticker.stickers[gSticker.selectedStickerIdx].pos.posy, gSticker.stickers[gSticker.selectedStickerIdx].width, gSticker.stickers[gSticker.selectedStickerIdx].height);
+        drawText()
+    }
+}
+
 function clickedCanvas(ev) {
     var clickedLine;
     if (document.body.clientWidth < 740) {
@@ -73,12 +238,14 @@ function clickedCanvas(ev) {
             gMeme.lines[i].isSelected = false;
         }
         drawImg();
+        if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
+            console.log('lala')
+            drawSticker();
+        }
     }
 
     return clickedLine
 }
-
-
 
 function addLine() {
     var newLine = _createLine()
@@ -87,6 +254,10 @@ function addLine() {
     gMeme.lines[currLineIdx].isSelected = false
     gMeme.selectedLineIdx = gMeme.lines.length-1
     drawImg()
+    if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
+        console.log('lala')
+        drawSticker();
+    }
 }
 
 function deleteLine() {
@@ -96,6 +267,10 @@ function deleteLine() {
     gMeme.selectedLineIdx = 0
     gMeme.lines[0].isSelected = true
     drawImg()
+    if (gSticker.stickers[0].isPlaced) {
+        console.log('lala')
+        drawSticker();
+    }
 }
 
 function switchLine() { 
@@ -117,18 +292,17 @@ function getTextForLineInput() {
     return gMeme.lines[currLineIdx].txt
 }
 
-function moveLine(direction) {
-    const currLineIdx = getCurrSelectedLineIdx()
-    if(direction === 'up') gMeme.lines[currLineIdx].pos.posy-=10
-    if(direction === 'down') gMeme.lines[currLineIdx].pos.posy+=10
-    drawImg();
-}
 
 function changeFontSize(request) {
     const currLineIdx = getCurrSelectedLineIdx()
     if(request === 'inc') gMeme.lines[currLineIdx].size+=5
     else if (request === 'dec') gMeme.lines[currLineIdx].size-=5
     drawImg();
+    if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
+        console.log('lala')
+        drawSticker();
+    }
+    
 }
 
 function drawImg() {
@@ -162,6 +336,11 @@ function addText(value) {
     const currLineIdx = getCurrSelectedLineIdx()
     gMeme.lines[currLineIdx].txt = value
     drawImg();
+    if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
+        console.log('lala')
+        drawSticker();
+    }
+    
 }
 
 function drawTextBox(x,y,idx) {
@@ -189,18 +368,33 @@ function setFontFamily(fontFamily) {
             break;
     }
     drawImg()
+    if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
+        console.log('lala')
+        drawSticker();
+    }
+
 }
 
 function setFontColor(fontColor) {
     const currSelectedLineIdx = gMeme.selectedLineIdx
     gMeme.lines[currSelectedLineIdx].color = fontColor
     drawImg()
+    if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
+        console.log('lala')
+        drawSticker();
+    }
+    
 }
 
 function setStrokeColor(strokeColor) {
     const currSelectedLineIdx = gMeme.selectedLineIdx
     gMeme.lines[currSelectedLineIdx].stroke = strokeColor
     drawImg()
+    if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
+        console.log('lala')
+        drawSticker();
+    }
+    
 }
 
 function setAlignment(direction) {
@@ -218,6 +412,10 @@ function setAlignment(direction) {
             break; 
     }
     drawImg()
+    if (gSticker.stickers[gSticker.selectedStickerIdx].isPlaced) {
+        console.log('lala')
+        drawSticker();
+    }
 }
 
 function _createLine() {

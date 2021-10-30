@@ -65,6 +65,10 @@ function getImgsForDisplay(imgs= gImgs) {
     else return imgs
 }
 
+function getImgs() {
+    return gImgs
+}
+
 function getKeywords() {
     return gKeywords
 }

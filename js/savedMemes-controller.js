@@ -1,6 +1,5 @@
 'use strict'
 
-
 function renderSavedMemes(){
     var strHTML = ''
     var memes = loadFromStorage(KEY)
