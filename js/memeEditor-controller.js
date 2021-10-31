@@ -3,8 +3,25 @@
 function addMouseListeners() {
     gElCanvas.addEventListener('mousemove', onMove)
     gElCanvas.addEventListener('mousedown', onDown)
-    document.querySelector('.stickers').addEventListener('mousedown', onDown)
     gElCanvas.addEventListener('mouseup', onUp)
+}
+
+
+function onStickerClicked(elSticker) {
+    const sticker = {
+        isDrag: false,
+        src: elSticker.src,
+        pos: {
+            x: gElCanvas.width/2,
+            y: gElCanvas.height/2
+        },
+        width: 100,
+        height: 82
+    }
+    gMeme.stickers.push(sticker)
+    console.log(gMeme.stickers)
+    renderCanvas()
+
 }
 
 function onClickedCanvas(ev) {
@@ -58,7 +75,7 @@ function onAddText(value) {
 
 
 function renderInputText() {
-    var text = getTextForLineInput()
+    var text = getTextForDisplay()
     var elInput = document.getElementById('text-line')
     elInput.value = `${text}`
 }

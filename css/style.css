@@ -278,6 +278,37 @@ canvas {
     font-family: poppins-light;
 }
 
+.hide {
+    display: none;
+}
+
+.hidden-keywords {
+    display: block;
+}
+.hidden-keywords.hide {
+    display: none;
+}
+
+
+.btn-keywords {
+    border: none;
+    margin-left: 9px;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+    color: white;
+    font-family: poppins-medium;
+    border-radius: 10px;
+
+}
+
+.btn-keywords:hover {
+    color: rgb(255, 251, 0);
+}
+
+.keywords-touch.hide {
+    height: max-content;
+}
 
 .keywords-nav img {
     width: 40px;
@@ -456,12 +487,13 @@ body.menu-open .main-screen {
     .keywords-touch {
         font-family: poppins-bold;
         width: 320px;
-        height: 40px;
-        color: black;
+        height: max-content;
+        flex-direction: column;
+        overflow:hidden;
+        color: rgba(0, 0, 0, 0.74);
         margin-top: 10px;
-        background-color: rgb(245, 244, 214);
+        background-color: rgb(245, 233, 214);
         border-radius: 30px;
-        overflow: hidden;
 
     }
 
@@ -471,30 +503,30 @@ body.menu-open .main-screen {
     }
 
     .keywords-nav >* {
-        margin-inline-start: 5px;
-        margin-inline-end: 5px;
+        margin-inline-start: 2px;
+        margin-inline-end: 3px;
     }
 
     .keywords-nav >*:first-child{
-        font-size: .56rem;
+        font-size: .1rem;
     }
 
     .keywords-nav >*:nth-child(2){
-        font-size: .78rem;
+        font-size: 2rem;
     }
 
     .keywords-nav >*:nth-child(3){
-        font-size: .5rem;
-    }
-    .keywords-nav >*:nth-child(4){
         font-size: 1rem;
     }
+    .keywords-nav >*:nth-child(4){
+        font-size: 1.3rem;
+    }
     .keywords-nav >*:nth-child(5){
-        font-size: .56rem;
+        font-size: 1.1rem;
     }
 
     .keywords-nav >*:nth-child(6){
-        font-size: .25rem;
+        font-size: 1.6rem;
     }
 
     input[type="search"]::-webkit-calendar-picker-indicator {
@@ -644,7 +676,6 @@ body.menu-open .main-screen {
     }
 
     .meme-search {
-        color:white;
         background-color: #ffffffd3;
         width: 400px;
         height: 50px;
@@ -668,17 +699,23 @@ body.menu-open .main-screen {
 
 
     .keywords-touch {
-        width: 650px;
+        width: 600px;
         padding: 10px;
         height: 50px;
+        justify-content: center;
+        flex-direction: column;
         color: white;
         font-family: poppins-bold;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
         background-color: #b547d6de;
         margin-inline-start: 15px;
         border-radius: 30px;
-        overflow: hidden;
     }
+
+    .btn-keywords {
+        font-size: 18px;
+    }
+
 
     .keywords-nav .next-btn {
         position: absolute;
@@ -696,21 +733,21 @@ body.menu-open .main-screen {
     }
 
     .keywords-nav >*:nth-child(2){
-        font-size: 18px;
+        font-size: 30px;
     }
 
     .keywords-nav >*:nth-child(3){
         font-size: 13px;
     }
     .keywords-nav >*:nth-child(4){
-        font-size: 14px;
+        font-size: 18px;
     }
     .keywords-nav >*:nth-child(5){
         font-size: 20px;
     }
 
     .keywords-nav >*:nth-child(6){
-        font-size: 8px;
+        font-size: 25px;
     }
 
     .keywords-nav:last-child >*{

@@ -3,18 +3,18 @@
 var gImgs = _createImgs()
 
 var gKeywords = {
-    'happy':17,
-    'funny': 18,
+    'happy':21,
+    'funny': 30,
     'crazy': 13,
     'animal': 24,
-    'kids' :15,
-    'politics':15,
-    'weird':17,
-    'movies': 18,
+    'kids' :19,
+    'politics':25,
+    'weird':21,
+    'movies': 30,
     'dogs': 13,
     'cats': 24,
-    'love' :15,
-    'shock':15
+    'love' :19,
+    'shock':25
 }
 
 

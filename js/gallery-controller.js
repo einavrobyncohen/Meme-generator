@@ -1,6 +1,6 @@
 'use strict'
 
-function init() {
+function onInit() {
     gElCanvas = document.getElementById('meme-canvas')
     gCtx = gElCanvas.getContext('2d')
 
@@ -12,21 +12,13 @@ function init() {
 }
 
 
-function showNextKeywords(isFirst) {
-    const FirstKeyWordList =['Happy','Funny','Crazy','Animal','Kids','Politics']
-    const SecondKeyWordList = ['Weird','Movies','Dogs','Cats','Love','Shock']
-    var keywords = (isFirst)? FirstKeyWordList : SecondKeyWordList
-    var elContainer = document.querySelector('.keywords-nav')
-    const newStrHTML = `
-    <button onclick="showNextKeywords(true)"><img src="ICONS/left.png"></button>
-    <li><a onclick="onTouchKeyWord(this)">${keywords[0]}</a></li>
-    <li><a onclick="onTouchKeyWord(this)">${keywords[1]}</a></li>
-    <li><a onclick="onTouchKeyWord(this)">${keywords[2]}</a></li>
-    <li><a onclick="onTouchKeyWord(this)">${keywords[3]}</a></li>
-    <li><a onclick="onTouchKeyWord(this)">${keywords[4]}</a></li>
-    <li><a onclick="onTouchKeyWord(this)">${keywords[5]}</a></li>
-    <button class="next-btn" onclick="showNextKeywords(false)"><img src="ICONS/right.png"></button>`
-    elContainer.innerHTML = newStrHTML
+function onShowMoreKeywords() {
+    const elHiddenKeywords =  document.querySelector('.hidden-keywords')
+    const elBtn = document.querySelector('.btn-keywords')
+    elHiddenKeywords.classList.toggle('hide')
+    document.querySelector('.keywords-touch').classList.toggle('hide')
+    elBtn.innerText = (elHiddenKeywords.classList.contains('hide'))? 'More':'Less'
+
 }
 
 function onTouchKeyWord(elKeyword) {
@@ -83,7 +75,7 @@ function onSelectImg(id) {
     var elMain = document.querySelector('main')
     elMain.hidden = true
     updateGMeme(id)
-    drawImg()
+    renderCanvas();
 }
 
 function showGallery() {
